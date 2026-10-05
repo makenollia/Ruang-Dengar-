@@ -3,28 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ruang Dengar MPK</title>
+
+  <title>Ruang Dengar MPK 26/27</title>
 
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     body {
       font-family: Arial, sans-serif;
-      background: #f8f3e8;
-      color: #6b5847;
+      background: #feefb8;
+      color: #432f2e;
+      line-height: 1.6;
     }
 
+    /* HEADER */
     header {
-      padding: 20px;
+      background: #c4dae8;
+      padding: 18px 7%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #f8f3e8;
-      border-bottom: 1px solid #e5d8c5;
+      border-bottom: 3px solid #432f2e;
     }
 
     .logo {
@@ -32,165 +35,375 @@
       font-weight: bold;
     }
 
-    .logo span {
-      color: #8c9a7a;
+    .menu {
+      font-size: 28px;
+      cursor: pointer;
     }
 
+    /* HERO */
     .hero {
-      padding: 55px 25px;
+      padding: 70px 7% 60px;
       text-align: center;
     }
 
-    .hero small {
-      font-size: 15px;
+    .small-title {
+      font-size: 18px;
+      margin-bottom: 8px;
     }
 
     .hero h1 {
-      font-size: 42px;
-      margin: 15px 0;
-      color: #5b4736;
+      font-size: 55px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      font-weight: 800;
     }
 
     .hero p {
-      font-size: 16px;
-      line-height: 1.7;
-      margin-bottom: 25px;
+      max-width: 650px;
+      margin: auto;
+      font-size: 17px;
     }
 
-    .button {
+    .main-button {
       display: inline-block;
-      padding: 15px 25px;
-      background: #a8b5a0;
-      color: white;
+      margin-top: 30px;
+      padding: 15px 28px;
+      background: #432f2e;
+      color: #feefb8;
       text-decoration: none;
-      border-radius: 30px;
+      border-radius: 15px;
       font-weight: bold;
+      transition: 0.2s;
     }
 
+    .main-button:hover {
+      transform: translateY(-3px);
+    }
+
+    /* CARDS */
     .cards {
-      padding: 20px;
+      padding: 20px 7% 70px;
       display: grid;
-      gap: 15px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
     }
 
     .card {
-      background: #eee6d7;
-      padding: 22px;
-      border-radius: 20px;
+      background: #c4dae8;
+      padding: 30px;
+      border-radius: 22px;
+      border: 2px solid #432f2e;
+      box-shadow: 7px 7px 0 #432f2e;
     }
 
-    .card h3 {
-      margin-bottom: 8px;
-      color: #5b4736;
+    .card-icon {
+      font-size: 38px;
+      margin-bottom: 15px;
+    }
+
+    .card h2 {
+      margin-bottom: 10px;
+      font-size: 22px;
     }
 
     .card p {
-      line-height: 1.5;
-      font-size: 14px;
+      font-size: 15px;
+    }
+
+    /* CARA KERJA */
+    .how {
+      padding: 70px 7%;
+      background: #c4dae8;
+      border-top: 3px solid #432f2e;
+      border-bottom: 3px solid #432f2e;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 34px;
+      margin-bottom: 40px;
     }
 
     .steps {
-      margin: 20px;
-      padding: 25px;
-      background: #e5d8c5;
-      border-radius: 25px;
-    }
-
-    .steps h2 {
-      margin-bottom: 20px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
     }
 
     .step {
-      padding: 12px 0;
+      background: #feefb8;
+      padding: 25px 20px;
+      border-radius: 20px;
+      border: 2px solid #432f2e;
+      text-align: center;
+    }
+
+    .step-number {
+      width: 42px;
+      height: 42px;
+      margin: 0 auto 15px;
+      background: #432f2e;
+      color: #feefb8;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       font-weight: bold;
     }
 
+    .step h3 {
+      margin-bottom: 8px;
+    }
+
+    /* FOOTER */
     footer {
-      margin-top: 30px;
-      padding: 30px 20px;
-      background: #8c9a7a;
-      color: white;
       text-align: center;
+      padding: 35px 7%;
+      background: #432f2e;
+      color: #feefb8;
+    }
+
+    footer p {
+      font-size: 14px;
+    }
+
+    .mpk-name {
+      margin-top: 8px;
+      font-weight: bold;
+    }
+
+    /* RESPONSIVE HP */
+    @media (max-width: 800px) {
+
+      header {
+        padding: 16px 6%;
+      }
+
+      .hero {
+        padding: 55px 6% 45px;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+        padding: 15px 6% 55px;
+      }
+
+      .steps {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .how {
+        padding: 55px 6%;
+      }
+
+      .section-title {
+        font-size: 29px;
+      }
+    }
+
+    @media (max-width: 500px) {
+
+      .hero h1 {
+        font-size: 38px;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 25px;
+      }
     }
   </style>
 </head>
 
 <body>
 
+  <!-- HEADER -->
   <header>
-    <div class="logo">
-      🍵 Ruang <span>Dengar</span>
-    </div>
-
-    <div>☰</div>
+    <div class="logo">🍵 Ruang Dengar</div>
+    <div class="menu">☰</div>
   </header>
 
-  <section class="hero">
-    <small>🌿 Selamat datang di</small>
 
-    <h1>Ruang Dengar</h1>
+  <!-- HERO -->
+  <section class="hero">
+
+    <div class="small-title">
+      Selamat datang di
+    </div>
+
+    <h1>
+      Ruang Dengar
+    </h1>
 
     <p>
-      Tempat untuk menyampaikan suara,
-      cerita, dan ide kamu.
+      Tempat untuk menyampaikan suara, saran, kritik,
+      dan aspirasi siswa kepada MPK 26/27.
+      Setiap suara berhak didengar.
     </p>
 
-    <a href="#" class="button">
+    <a href="#" class="main-button">
       💌 Sampaikan Aspirasi
     </a>
+
   </section>
 
+
+  <!-- MENU CARDS -->
   <section class="cards">
 
     <div class="card">
-      <h3>💌 Kirim Aspirasi</h3>
+      <div class="card-icon">💌</div>
+
+      <h2>
+        Kirim Aspirasi
+      </h2>
+
       <p>
         Sampaikan saran, kritik, keluhan,
-        ide, atau apresiasimu.
+        ide, maupun apresiasi kamu kepada MPK.
       </p>
     </div>
 
+
     <div class="card">
-      <h3>🔎 Cek Aspirasi</h3>
+      <div class="card-icon">🔎</div>
+
+      <h2>
+        Cek Aspirasi
+      </h2>
+
       <p>
-        Lihat perkembangan aspirasi
-        yang sudah kamu kirim.
+        Lihat perkembangan aspirasi kamu
+        mulai dari menunggu hingga selesai.
       </p>
     </div>
 
+
     <div class="card">
-      <h3>🌿 Tentang Kami</h3>
+      <div class="card-icon">🤎</div>
+
+      <h2>
+        Tentang Kami
+      </h2>
+
       <p>
-        Kenali Ruang Dengar dan
-        MPK di sekolahmu.
+        Kenali Ruang Dengar dan bagaimana
+        MPK 26/27 membantu menyampaikan suara siswa.
       </p>
     </div>
 
   </section>
 
-  <section class="steps">
 
-    <h2>🌱 Cara Kerja</h2>
+  <!-- CARA KERJA -->
+  <section class="how">
 
-    <div class="step">① Kirim Aspirasi</div>
-    <div class="step">↓</div>
-    <div class="step">② Didengar</div>
-    <div class="step">↓</div>
-    <div class="step">③ Diproses</div>
-    <div class="step">↓</div>
-    <div class="step">④ Selesai ✨</div>
+    <h2 class="section-title">
+      Cara Kerja
+    </h2>
+
+    <div class="steps">
+
+      <div class="step">
+
+        <div class="step-number">
+          1
+        </div>
+
+        <h3>
+          Kirim
+        </h3>
+
+        <p>
+          Sampaikan aspirasi kamu
+          melalui formulir.
+        </p>
+
+      </div>
+
+
+      <div class="step">
+
+        <div class="step-number">
+          2
+        </div>
+
+        <h3>
+          Didengar
+        </h3>
+
+        <p>
+          Aspirasi kamu dibaca
+          oleh anggota MPK.
+        </p>
+
+      </div>
+
+
+      <div class="step">
+
+        <div class="step-number">
+          3
+        </div>
+
+        <h3>
+          Diproses
+        </h3>
+
+        <p>
+          Aspirasi ditindaklanjuti
+          sesuai kebutuhan.
+        </p>
+
+      </div>
+
+
+      <div class="step">
+
+        <div class="step-number">
+          4
+        </div>
+
+        <h3>
+          Selesai
+        </h3>
+
+        <p>
+          Kamu bisa melihat
+          perkembangan akhirnya.
+        </p>
+
+      </div>
+
+    </div>
 
   </section>
 
+
+  <!-- FOOTER -->
   <footer>
+
     <p>
-      “Setiap suara punya tempat untuk didengar.”
+      “Ketika banyak yang bisa berbicara,
+      tapi sedikit untuk yang bisa mendengar.”
     </p>
 
-    <br>
+    <div class="mpk-name">
+      MPK 26/27
+    </div>
 
-    <p>— MPK SMA</p>
   </footer>
 
 </body>
-        </html>
+</html>
