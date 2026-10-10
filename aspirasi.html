@@ -804,47 +804,111 @@
   </footer>
 
 
-  <script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // Ganti dua nilai ini dengan milik project Supabase kamu.
+  const SUPABASE_URL = "https://sklzllnrgetgqdtgazxe.supabase.co/rest/v1/";
+  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_tp0s6OY5jhSLcxCLIOLOhA_tkoWTST8";
 
-    const anonymousCheckbox =
-      document.getElementById("anonymous");
+  const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
 
-    const namaInput =
-      document.getElementById("nama");
+  const form = document.getElementById("aspirationForm");
+  const anonymousCheckbox = document.getElementById("anonymous");
+  const namaInput = document.getElementById("nama");
 
+  anonymousCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      namaInput.value = "";
+      namaInput.disabled = true;
+      namaInput.placeholder = "Aspirasi akan dikirim secara anonim";
+    } else {
+      namaInput.disabled = false;
+      namaInput.placeholder = "Masukkan nama kamu";
+    }
+  });
 
-    anonymousCheckbox.addEventListener("change", function () {
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-      if (this.checked) {
+    const jenis = form.querySelector('input[name="jenis"]:checked');
+    const kepentingan = form.querySelector(
+      'input[name="kepentingan"]:checked'
+    );
+    const pilihanKontak = form.querySelector(
+      'input[name="boleh_dihubungi"]:checked'
+    );
 
-        namaInput.value = "";
-        namaInput.disabled = true;
-        namaInput.placeholder = "Aspirasi akan dikirim secara anonim";
+    if (!jenis || !kepentingan || !pilihanKontak) {
+      alert("Lengkapi pilihan yang wajib diisi dulu ya.");
+      return;
+    }
 
-      } else {
+    const bersediaDihubungi = pilihanKontak.value === "Ya";
+    const trackingCode = crypto.randomUUID();
 
-        namaInput.disabled = false;
-        namaInput.placeholder = "Masukkan nama kamu";
+    const aspirasi = {
+      nama: anonymousCheckbox.checked
+        ? null
+        : namaInput.value.trim() || null,
+      kelas: document.getElementById("kelas").value,
+      jenis: jenis.value,
+      tujuan: document.getElementById("tujuan").value,
+      isi: document.getElementById("isi").value.trim(),
+      solusi: document.getElementById("solusi").value.trim() || null,
+      kepentingan: kepentingan.value,
+      boleh_dihubungi: bersediaDihubungi,
+      kontak: bersediaDihubungi
+        ? document.getElementById("kontak").value.trim() || null
+        : null,
+      status: "Menunggu",
+      tracking_code: trackingCode
+    };
 
+    const tombolKirim = form.querySelector('button[type="submit"]');
+    const tulisanAsli = tombolKirim.textContent;
+
+    tombolKirim.disabled = true;
+    tombolKirim.textContent = "Mengirim...";
+
+    try {
+      const { error } = await supabaseClient
+        .from("aspirations mpk")
+        .insert([aspirasi]);
+
+      if (error) {
+        console.error("Supabase insert error:", error);
+        alert(
+          "Aspirasi belum berhasil disimpan.\n\n" +
+          "Pesan error: " + error.message
+        );
+        return;
       }
 
-    });
+      alert(
+        "Aspirasi berhasil dikirim! 💌\n\n" +
+        "Status: Menunggu\n\n" +
+        "Kode pelacakan kamu:\n" + trackingCode +
+        "\n\nSimpan kode ini. Fitur untuk mengecek statusnya " +
+        "akan kita sambungkan berikutnya."
+      );
 
-
-    document
-      .getElementById("aspirationForm")
-      .addEventListener("submit", function(event) {
-
-        event.preventDefault();
-
-        alert(
-          "Aspirasi kamu sudah siap dikirim! 💌\n\n" +
-          "Untuk sekarang data belum disimpan ke database. " +
-          "Nanti kita sambungkan ke sistem MPK 26/27."
-        );
-
-      });
-
+      form.reset();
+      namaInput.disabled = false;
+      namaInput.placeholder = "Masukkan nama kamu";
+    } catch (error) {
+      console.error(error);
+      alert(
+        "Tidak bisa terhubung ke Supabase. " +
+        "Periksa koneksi internet lalu coba lagi."
+      );
+    } finally {
+      tombolKirim.disabled = false;
+      tombolKirim.textContent = tulisanAsli;
+    }
+  });
   </script>
 
 </body>
